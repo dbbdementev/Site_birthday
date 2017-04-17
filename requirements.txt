@@ -1,0 +1,4 @@
+celery
+Django==1.9.7
+pip install celery django-celery
+pip instal vk

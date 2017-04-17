@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load staticfiles %}
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% trans 'Регистрация' %}</title>
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-social.css' %}">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form action="{% url 'set_language' %}" method="post">
+	{% csrf_token %}
+	<input name="next" type="hidden"  value="{{ redirect_to }}"/>
+	<select name="language">
+		{% get_current_language as LANGUAGE_CODE %}
+		{% get_available_languages as LANGUAGES %}
+		{% get_language_info_list for LANGUAGES as languages %}
+		{% for language in languages %}
+		<option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+    	{{ language.name_local }} ({{ language.code }})
+		</option>
+		{% endfor %}
+	</select>
+	<input type="submit" value="Go" />
+</form>
+<form id="signup" role="form" method="post">
+	<h1>{% trans 'Присоединяйтесь к нам!' %}</h1>
+	{% csrf_token %}
+	{{form.non_field_errors}}
+	{{form.username.errors}}
+	<label  for="form.username.id_for_label">{% trans 'Логин:' %}</label><br>
+	{{form.username}}
+	{{form.password.errors}}
+	{{help_text|safe}}
+	<label for="form.password.id_for_label">{% trans 'Пароль:' %} </label><br>
+	{{form.password}}
+	{{form.verify_password.errors}}
+	<label for="form.verify_password.id_for_label">{% trans 'Повторите пароль:' %} </label><br>
+	{{form.verify_password}}
+	{{form.email.errors}}
+	<label for="form.email.id_for_label">{% trans 'Email:' %} </label><br>
+	{{form.email}}
+	<button type="submit">{% trans 'Зарегистрироваться' %}</button><br>
+	<h3>{% trans 'Или войти через:' %}</h3>
+	<a href="#" class="button5" data-ok>OK</a>
+	<a href="#" class="button5" data-vk>VK</a>
+	<a href="#" class="button5" data-facebook>facebook</a>
+</form>
+</body>
+

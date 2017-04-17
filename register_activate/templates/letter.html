@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{load static}
+{% block title %} Поздравить{% endblock%}
+{% block content %}
+<div class="column col-sm-10 col-xs-11" id="main">
+    <div class="row">
+        <div class="panel panel-default">
+            <!-- menu -->
+            <div class="panel-heading"><a href="/congratulations_new/" class="pull-right"></a>
+            </div>
+            <div>
+                <form method="post" action="">{% csrf_token %}
+                    <textarea name="text" rows="15" cols="90">
+                        {{letter_id}}
+                    </textarea ><br>
+                    <p><br><input required placeholder="Email" name="email" type="email"></p><br>
+                    текущее время : {{data_current}}
+                    <p><br><input required placeholder="Дата отправки" name="date_send" type="datetime-local"></p><br>
+                    <p><input type="submit" value="Отправить "></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

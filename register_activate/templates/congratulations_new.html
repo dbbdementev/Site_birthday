@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{load static}
+{% block title %} Свое поздравление{% endblock%}
+{% block content %}
+<div class="column col-sm-10 col-xs-11" id="main">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="#" class="pull-right"></a> <h4></h4>
+            </div>
+            <div class="panel-body">
+                <form method="post" action="">{% csrf_token %}
+                    <p><textarea name="text" cols="60" rows="10" ></textarea></p>
+                    <p>Какой праздник:<input list="cocktail" name="name" required placeholder=""></p>
+                    <datalist id="cocktail" >
+                        {% for rec in list %}
+                        <option value="{{rec.name}}">{%endfor%}
+                    </datalist>
+                    <div>
+                        <form>
+                            <label><input type="radio" name="category_cmc" value="1" checked> Обычное </label><br>
+                            <label><input type="radio" name="category_cmc" value="2"> Короткое(смс)</label>
+                        </form>
+                        <p><input type="submit"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

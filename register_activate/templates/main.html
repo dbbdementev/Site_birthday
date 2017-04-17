@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load staticfiles %}
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% trans 'Добро пожаловать на наш сайт' %}</title>
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<form action="{% url 'set_language' %}" method="post">
+{% csrf_token %}
+<input name="next" type="hidden" value="{{ redirect_to }}" />
+<select name="language">
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+{% for language in languages %}
+<option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected="selected" {% endif %}>
+    {{ language.name_local }} ({{ language.code }})
+</option>
+{% endfor %}
+</select>
+<input type="submit" value="Go" />
+</form>
+<body>
+  	<form id="signup" action="" method="post">
+		<h1>{% trans 'Присоединяйтесь к нам!' %}</h1>
+		<a href="/register_activate/signup/" class="button">{% trans 'Зарегистрироваться' %}</a>
+		<a href="/register_activate/signin/" class="button">{% trans 'Войти' %}</a>
+		<h3>{% trans 'Или войти через:' %}</h3>
+		<a href="javascript:void(0);" onclick="authVK();"class="button5" data-vk>VK</a>
+		<a href="https://connect.ok.ru/oauth/authorize?client_id=1249870080&scope=VALUABLE_ACCESS;LONG_ACCESS_TOKEN;APP_INVITE;GET_EMAIL;VIDEO_CONTENT&response_type=code&redirect_uri=http://127.0.0.1:8000/register_activate/register_ok/?&layout=w
+" class="button5"data-ok>OK</a>
+
+		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+		</fb:login-button>
+	</form>
+<div id="status">
+</div>
+	<script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var vkAppId = {{ VK_APP_ID|default:"5880466" }};
+    if (vkAppId) {
+        VK.init({ apiId: vkAppId });
+    }
+    function authVK () {
+        if (!vkAppId) {
+            alert ("Пожалуйста, укажите VK.com идентификатор приложения в локальных настройках файла");
+            return false;
+        }
+        VK.Auth.login(function(response) {
+            var params = "";
+            if (response.session) {
+                params = "first_name=" + encodeURI(response.session.user.first_name) + "&last_name=" + encodeURI(response.session.user.last_name);
+                params += "&nickname=" + encodeURI(response.session.user.nickname) + "&id=" + encodeURI(response.session.user.id);
+            }
+            window.location = "http://127.0.0.1:8000/register_activate/register_vk/?" + params;
+        });
+        return false;
+    }
+</script>
+
+
+<script>
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1861883774097170',
+    cookie     : true,  // enable cookies to allow the server to access
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.8' // use graph api version 2.8
+  });
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+  };
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+</script>
+
+</body>

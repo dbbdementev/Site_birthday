@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{load static}
+{% block title %} Настройки {% endblock%}
+{% block content %}
+<div class="column col-sm-10 col-xs-11" id="main">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="#" class="pull-right"></a> <h4></h4></div>
+            <div class="panel-body">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <p><input placeholder="Фамилия:" name="surname" value="{{list.surname}}" type="text"></p>
+                    <p><input placeholder="Имя: " name="name" value="{{list.name }}"></p>
+                    <p><input placeholder="Отчество: " name="middlename" value="{{list.middlename}}"></p>
+                    {% if list.country %}
+                    <p><input list="cocktai" value="{% load countries %}{% get_country list.country as country %}{{ country.name }}" name="country" >
+                        <datalist id="cocktai">{% for rec in list_countries %}<option value="{{rec}}">{%endfor%}</datalist>
+                        {{widget}}<img class="country-select-flag" id="{{flag_id}}" style="margin: 6px 4px 0" src="{{country.flag}}"></p>
+                    {% else %}
+                    <p><input list="cocktail" placeholder="Страна:" name="country" ></p>
+                    <datalist id="cocktail">{% for rec in list_countries %}<option value="{{rec}}">{%endfor%}</datalist>
+                    {% endif %}
+                    <p><input placeholder="Город: " name="city" value="{{list.city}}"></p>
+                    <p><input placeholder="Телефон:" name="phone" value="{% if list.phone %}{{list.phone}}{% endif %}"></p>
+                    <p><input name="birthday" value="{{list.birthday| date:'Y-m-d'}}" type="date" ></p>
+                    {% if list.gender = 'Ж'%}
+                    <p><input type="radio" name="gender"  value="М" /> М
+                        <input type="radio" name="gender" value="Ж" checked="checked" /> Ж
+                    </p>
+                    {% elif list.gender = 'М'%}
+                    <p><input type="radio" name="gender"  value="М" checked="checked" /> М
+                        <input type="radio" name="gender" value="Ж" /> Ж
+                    </p>
+                    {% else %}
+                    <p><input type="radio" name="gender"  value="М" > М
+                        <input type="radio" name="gender" value="Ж" /> Ж
+                    </p>
+                    {% endif %}
+                    <p><input placeholder="Часовой пояс: " name="time_zone" value="{{list.time_zone}}"></p>
+                    <p><input placeholder="Время отправки сообщений " name="time_congratulations" value="{{list.time_congratulations}}"></p>
+                    <p><input type="submit" value="Сохранить"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<p><input name="country" value="{% load countries %}{% get_country ' ' as country %}{{ country.name }}">
+{% endblock %}
+

@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-09 14:53+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\register_activate\forms.py:35
+msgid "Пароль не совпадает!"
+msgstr ""
+
+#: .\register_activate\forms.py:42
+msgid "Такой Email уже зарегестрирован!"
+msgstr ""
+
+#: .\register_activate\forms.py:66
+msgid "Пожалуйста, введите ваше имя пользователя или адрес электронной почты!"
+msgstr ""
+
+#: .\register_activate\forms.py:70
+msgid "Имя пользователя не существует!"
+msgstr ""
+
+#: .\register_activate\forms.py:73
+msgid "Имя пользователя и пароль не совпадают!"
+msgstr ""
+
+#: .\register_activate\forms.py:77
+msgid "Электронной почты не существует!"
+msgstr ""
+
+#: .\register_activate\forms.py:80
+msgid "Электронная почта и пароль не совпадают!"
+msgstr ""
+
+#: .\register_activate\templates\log_in.html:7
+msgid "Авторизация"
+msgstr ""
+
+#: .\register_activate\templates\log_in.html:33
+msgid "Пожалуйста, используйте свой логин или электронную почту"
+msgstr ""
+
+#: .\register_activate\templates\log_in.html:37
+msgid "Имя Пользователя"
+msgstr ""
+
+#: .\register_activate\templates\log_in.html:40
+msgid "Или По Электронной Почте"
+msgstr ""
+
+#: .\register_activate\templates\log_in.html:43
+msgid "Пароль"
+msgstr ""
+
+#: .\register_activate\templates\log_in.html:45
+#: .\register_activate\templates\main.html:35
+msgid "Войти"
+msgstr ""
+
+#: .\register_activate\templates\log_in.html:46
+#: .\register_activate\templates\register.html:36
+msgid "Или войти через:"
+msgstr ""
+
+#: .\register_activate\templates\main.html:7
+msgid "Добро пожаловать на наш сайт"
+msgstr ""
+
+#: .\register_activate\templates\main.html:33
+#: .\register_activate\templates\register.html:19
+msgid "Присоединяйтесь к нам!"
+msgstr ""
+
+#: .\register_activate\templates\main.html:34
+#: .\register_activate\templates\register.html:35
+msgid "Зарегистрироваться"
+msgstr ""
+
+#: .\register_activate\templates\register.html:7
+msgid "Регистрация"
+msgstr ""
+
+#: .\register_activate\templates\register.html:23
+msgid "Логин:"
+msgstr ""
+
+#: .\register_activate\templates\register.html:27
+msgid "Пароль:"
+msgstr ""
+
+#: .\register_activate\templates\register.html:30
+msgid "Повторите пароль:"
+msgstr ""
+
+#: .\register_activate\templates\register.html:33
+msgid "Email:"
+msgstr ""
+
+#: .\register_activate\views.py:167
+msgid "Вы успешно вошли в систему"
+msgstr ""
+
+#: .\z\settings.py:113
+msgid "Russian"
+msgstr ""
+
+#: .\z\settings.py:114
+msgid "English"
+msgstr ""
+
+#: .\z\urls.py:24
+msgid "^$"
+msgstr ""
+
+#~ msgid "Welcome to our page"
+#~ msgstr "Добро пожаловать на нашу страницу"

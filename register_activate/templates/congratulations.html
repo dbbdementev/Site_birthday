@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{load static}
+{% block title %} Поздравить с Днем Рождения {% endblock%}
+{% block content %}
+<div class="column col-sm-10 col-xs-11" id="main">
+    <div class="row">
+        <div class="panel panel-default">
+            <!-- menu -->
+            <div class="panel-heading"><a href="/congratulations_new/" class="pull-right">Записать свое поздравление</a>
+                {% if data %}
+                <h4>Вы выбрали: {{ data }}</h4>
+                {% else %}
+                <h4>Выберите Дату: </h4>
+                {% endif %}
+                {% if type_name_id %}
+                <h4>Вы выбрали: {{ type_name_id }}</h4>
+                {% endif %}
+            </div><br>
+            <!-- date selection -->
+            <div>
+                <form method="post" action="">{% csrf_token %}
+                    <p>
+                        <input name="data" value="{{data}}" type="date" >
+                        <input type="submit" value="Выбрать">
+                    </p>
+                </form>
+            </div>
+            <!-- the choice of holiday -->
+            <div>
+                {% for rec in type_name %}
+                <p>
+                    <b>
+                        {{ rec.data| date:'d F'}}
+                    </b>--
+                    <a href="/congratulations/?type_name_id={{rec.name}}" style=""name="'name">{{ rec.name}}
+                    </a>
+                    <hr>
+                {%endfor%}
+            </div>
+            <!-- congratulations -->
+            <div>
+                {% for rec in congratulations_text %}
+                <p>
+                    <b>
+                        {{ rec.data| date:'d F'}}
+                    </b>--
+                    <a href="/letter/?letter_id={{rec.text}}" style=""name="'name">{{ rec.text}}
+                    </a><hr>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

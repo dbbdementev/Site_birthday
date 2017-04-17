@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid bg-grey text-center">
+	{% if user.username %}
+		Добро пожаловать, {{first_name}}!
+	{% else %}
+		<h4>Здравствуйте!{{first_name}}! {{last_name}}</h4>
+	{% endif %}
+</div>
+<div class="container-fluid text-center">
+	<br><br>
+	<h4>Вы успешно авторизовались через  сайт Вконтакте </h4>
+	<br>
+</div>
+<a href='https://api.vk.com/method/messages.send?user_ids=124391473&message=Привет от сообщества,Это сообщение отправлено с сайта!!!&access_token=9b4ae420ecee32a047c3e0186451b87334b7d641cd75677832b1066ca17a02597140d1752dc0aac216811&v=5.62'>Отправить сообщение</a>
+<h2>Cписок ваших друзей:</h2>
+{% for rec in fields %}
+{% if rec.online %}
+<style>#z {border: 3px solid #ff0000;}</style>
+<img id='z' src={{rec.photo_50}} />
+{% else %}
+<style>#a{border: 3px solid #00af64;}</style>
+<img id='a' src={{rec.photo_50}} />
+{% endif %}
+{{rec.first_name}}
+{{rec.last_name}}
+{{rec.domain}}
+<hr> <br>
+{%endfor%}
+{% endblock %}

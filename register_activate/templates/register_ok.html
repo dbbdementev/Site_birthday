@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid bg-grey text-center">
+	{% if user.username %}
+		Добро пожаловать, {{user.username}}!
+	{% else %}
+		<h4>Здравствуйте!</h4>
+	{% endif %}
+</div>
+<div class="container-fluid text-center">
+	<br><br>
+	<h4>Вы успешно авторизовались через  сайт Одноклассники</h4>
+	<br>
+</div>
+
+
+
+
+<form action=https://api.ok.ru/oauth/token.do?code={{code}}&client_id=1249870080&client_secret=C3A9D6E93C9D2A28CADE0DDB&redirect_uri=http://127.0.0.1:8000/register_activate/OK/?&grant_type=authorization_code method="post">
+	Для согласия в течение 2 минут нажмите на ссылку
+<input type="submit" value="Go" />
+</form>
+{% endblock %}

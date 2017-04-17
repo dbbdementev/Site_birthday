@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid bg-grey text-center">
+	{% if user.username %}
+		Добро пожаловать, {{first_name}}!
+	{% else %}
+		<h4>Здравствуйте!{{first_name}}! {{last_name}}</h4>
+	{% endif %}
+</div>
+<div class="container-fluid text-center">
+	<br><br>
+	<h4>Вы успешно авторизовались через  сайт Вконтакте </h4>
+	<br>
+</div>
+
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?139"></script>
+<!-- VK Widget -->
+<div id="vk_groups"></div>
+<script type="text/javascript">
+VK.Widgets.Group("vk_groups", {mode: 3, width: "220"}, 140753926);
+</script>
+
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?139"></script>
+<!-- VK Widget -->
+<div id="vk_allow_messages_from_community"></div>
+<script type="text/javascript">
+VK.Widgets.AllowMessagesFromCommunity("vk_allow_messages_from_community", {}, 140753926);
+</script>
+
+<h2>Cписок ваших друзей:</h2>
+{% for rec in fields %}
+{% if rec.online %}
+<style>#z {border: 3px solid #ff0000;}</style>
+<img id='z' src={{rec.photo_50}} />
+{% else %}
+<style>#a{border: 3px solid #00af64;}</style>
+<img id='a' src={{rec.photo_50}} />
+{% endif %}
+{{rec.first_name}}
+{{rec.last_name}}
+{{rec.domain}}
+<hr> <br>
+{%endfor%}
+{% endblock %}
